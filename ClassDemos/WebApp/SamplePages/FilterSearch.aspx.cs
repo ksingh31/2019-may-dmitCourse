@@ -40,6 +40,53 @@ namespace WebApp.SamplePages
 
         protected void AlbumList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //access data located on the gridviewrow
+            //template web control access syntax
+            GridViewRow agvrow = AlbumList.Rows[AlbumList.SelectedIndex];
+            string albumid = (agvrow.FindControl("AlbumID") as Label).Text;
+            // albumid = "0"; //testing to cause error - REMOVE AFTER TESTING
+
+            MessageUserControl.TryRun(() => {
+                //standard lookup
+                AlbumController sysmgr = new AlbumController();
+                Album datainfo = sysmgr.Album_Get(int.Parse(albumid));
+                if (datainfo == null)
+                {
+                    ClearControls();
+                    throw new Exception("No Record Found for Selected Album");
+                }
+                else
+                {
+                    EditAlbumID.Text = datainfo.AlbumId.ToString();
+                    EditTitle.Text = datainfo.Title;
+                    EditAlbumArtistList.SelectedValue = datainfo.ArtistId.ToString();
+                    EditReleaseYear.Text = datainfo.ReleaseYear.ToString();
+                    EditReleaseLabel.Text = datainfo.ReleaseLabel == null ? "" : datainfo.ReleaseLabel;
+                }
+            }, "Album Serach", "View Album Details");
+        }
+
+        protected void ClearControls()
+        {
+            EditAlbumID.Text = "";
+            EditTitle.Text = "";
+            EditAlbumArtistList.ClearSelection();
+            EditReleaseYear.Text = "";
+            EditReleaseLabel.Text = "";
+        }
+
+        protected void Add_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Update_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Remove_Click(object sender, EventArgs e)
+        {
 
         }
     }

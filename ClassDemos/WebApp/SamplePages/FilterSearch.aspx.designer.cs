@@ -148,6 +148,33 @@ namespace WebApp.SamplePages {
         protected global::System.Web.UI.WebControls.TextBox EditReleaseLabel;
         
         /// <summary>
+        /// Add control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton Add;
+        
+        /// <summary>
+        /// Update control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton Update;
+        
+        /// <summary>
+        /// Remove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton Remove;
+        
+        /// <summary>
         /// AlbumListODS control.
         /// </summary>
         /// <remarks>

@@ -16,11 +16,11 @@
         &nbsp;&nbsp;
         <asp:DropDownList ID="ArtistList" runat="server"></asp:DropDownList>
         &nbsp;&nbsp;
-        <asp:LinkButton ID="FetchAlbums" runat="server">Fetch Albums</asp:LinkButton>
+        <asp:LinkButton ID="FetchAlbums" class="btn-primary" runat="server" CausesValidation="false">Fetch Albums</asp:LinkButton>
         <br />
         <asp:GridView ID="AlbumList" runat="server" AutoGenerateColumns="false" DataSourceID="AlbumListODS" AllowPaging="True" PageSize="5" CssClass="table table-striped" GridLines="Horizontal" BorderStyle="None" OnSelectedIndexChanged="AlbumList_SelectedIndexChanged">
             <Columns>
-                <asp:CommandField SelectText="View" ShowSelectButton="True"></asp:CommandField>
+                <asp:CommandField SelectText="View" ShowSelectButton="True" CausesValidation="false"></asp:CommandField>
                 <asp:TemplateField HeaderText="Album">
                     <ItemTemplate>
                         <asp:Label ID="AlbumTitle" runat="server"
@@ -69,6 +69,9 @@
         &nbsp;&nbsp;
         <asp:TextBox ID="EditReleaseLabel" runat="server"></asp:TextBox>
         <br />
+        <asp:LinkButton ID="Add" runat="server" OnClick="Add_Click">Add</asp:LinkButton> &nbsp;&nbsp;
+        <asp:LinkButton ID="Update" runat="server" OnClick="Update_Click">Update</asp:LinkButton> &nbsp;&nbsp;
+        <asp:LinkButton ID="Remove" runat="server" OnClientClick="return confirm('Are you sure, you wish to remove this Album from the Collection.')" CausesValidation="false" OnClick="Remove_Click">Remove</asp:LinkButton> &nbsp;&nbsp;
     </div>
     <asp:ObjectDataSource ID="AlbumListODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="Album_GetByArtist" TypeName="ChinookSystem.BLL.AlbumController">
         <SelectParameters>
