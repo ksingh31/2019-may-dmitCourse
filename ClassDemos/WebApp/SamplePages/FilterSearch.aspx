@@ -1,4 +1,7 @@
 ﻿<%@ Page Title="Filter Search" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FilterSearch.aspx.cs" Inherits="WebApp.SamplePages.FilterSearch" %>
+
+<%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Filter Search</h1>
     <blockquote class="alert alert-info">
@@ -7,15 +10,15 @@
         use various form controls. This will review event driven logic.
     </blockquote>
     <div class="col-md-offset-3">
-         <asp:Label ID="Message" runat="server" ></asp:Label>
+        <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
         <br /><br />
         <asp:Label ID="label1" runat="server" Text="Select an artist:"></asp:Label>
         &nbsp;&nbsp;
         <asp:DropDownList ID="ArtistList" runat="server"></asp:DropDownList>
         &nbsp;&nbsp;
-        <asp:LinkButton ID="FetchAlbums" runat="server" OnClick="FetchAlbums_Click">Fetch Albums</asp:LinkButton>
+        <asp:LinkButton ID="FetchAlbums" runat="server">Fetch Albums</asp:LinkButton>
         <br />
-        <asp:GridView ID="AlbumList" runat="server" AutoGenerateColumns="false" DataSourceID="AlbumListODS" AllowPaging="True" PageSize="5">
+        <asp:GridView ID="AlbumList" runat="server" AutoGenerateColumns="false" DataSourceID="AlbumListODS" AllowPaging="True" PageSize="5" CssClass="table table-striped" GridLines="Horizontal" BorderStyle="None" OnSelectedIndexChanged="AlbumList_SelectedIndexChanged">
             <Columns>
                 <asp:CommandField SelectText="View" ShowSelectButton="True"></asp:CommandField>
                 <asp:TemplateField HeaderText="Album">

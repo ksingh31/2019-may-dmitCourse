@@ -16,7 +16,6 @@ namespace WebApp.SamplePages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Message.Text = "";
             if (!Page.IsPostBack)
             {
                 BindArtistList();
@@ -26,7 +25,7 @@ namespace WebApp.SamplePages
 
         protected void BindArtistList()
         {
-            try
+            MessageUserControl.TryRun(() =>
             {
                 ArtistController sysmgr = new ArtistController();
                 List<Artist> info = sysmgr.Artist_List();
@@ -36,13 +35,10 @@ namespace WebApp.SamplePages
                 ArtistList.DataValueField = nameof(Artist.ArtistId);
                 ArtistList.DataBind();
                 //ArtistList.Items.Insert(0, "0");
-            }
-            catch(Exception ex)
-            {
-                Message.Text = ex.Message;
-            }
+            });
         }
-        protected void FetchAlbums_Click(object sender, EventArgs e)
+
+        protected void AlbumList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
