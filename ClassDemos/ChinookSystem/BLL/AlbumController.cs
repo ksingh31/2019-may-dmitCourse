@@ -47,8 +47,8 @@ namespace ChinookSystem.BLL
         }
         #endregion
 
-        #region Add, Update, Deelete
-        
+        #region Add, Update, Delete
+        [DataObjectMethod(DataObjectMethodType.Insert,false)]
         public int Album_Add(Album item)
         {
             using (var context = new ChinookSystemContext())
@@ -59,6 +59,7 @@ namespace ChinookSystem.BLL
             }
         }
 
+        [DataObjectMethod(DataObjectMethodType.Update, false)]
         public int Album_Update(Album item)
         {
             using (var context = new ChinookSystemContext())
@@ -66,6 +67,12 @@ namespace ChinookSystem.BLL
                 context.Entry(item).State = System.Data.Entity.EntityState.Modified;
                 return context.SaveChanges(); //retrn is number of rows effected
             }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Delete, false)]
+        public int Album_Delete(Album item)
+        {
+            return Album_Delete(item.AlbumId);
         }
 
         public int Album_Delete(int albumid)
