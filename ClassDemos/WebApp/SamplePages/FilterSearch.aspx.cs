@@ -157,6 +157,7 @@ namespace WebApp.SamplePages
                     {
                         EditAlbumID.Text = "";
                         AlbumList.DataBind();
+                        ClearControls();
                     }
 
 
