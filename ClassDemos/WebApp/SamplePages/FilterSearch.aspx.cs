@@ -77,17 +77,91 @@ namespace WebApp.SamplePages
 
         protected void Add_Click(object sender, EventArgs e)
         {
-
+            if (int.Parse(EditReleaseYear.Text) >= 1950 &&
+                int.Parse(EditReleaseYear.Text) <= DateTime.Today.Year)
+            {
+                MessageUserControl.TryRun(() =>
+                {
+                    Album item = new Album();
+                    item.Title = EditTitle.Text;
+                    item.ReleaseYear = int.Parse(EditReleaseYear.Text);
+                    item.ReleaseLabel = string.IsNullOrEmpty(EditReleaseLabel.Text) ? null : EditReleaseLabel.Text;
+                    item.ArtistId = int.Parse(EditAlbumArtistList.SelectedValue);
+                    AlbumController sysmgr = new AlbumController();
+                    int newalbumid = sysmgr.Album_Add(item);
+                    EditAlbumID.Text = newalbumid.ToString();
+                    ArtistList.SelectedValue = item.ArtistId.ToString();
+                    AlbumList.DataBind();
+                });
+            }
+            else
+            {
+                MessageUserControl.ShowInfo("Adding", "Release Year must be 1950 to today");
+            }
         }
 
         protected void Update_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(EditAlbumID.Text))
+            {
+                MessageUserControl.ShowInfo("Updating", "Search for an exsiting album before updating");
+            }
+            else if (int.Parse(EditReleaseYear.Text) >= 1950 &&
+                    int.Parse(EditReleaseYear.Text) <= DateTime.Today.Year)
+            {
+                MessageUserControl.TryRun(() =>
+                {
+                    Album item = new Album();
+                    item.AlbumId = int.Parse(EditAlbumID.Text);
+                    item.Title = EditTitle.Text;
+                    item.ReleaseYear = int.Parse(EditReleaseYear.Text);
+                    item.ReleaseLabel = string.IsNullOrEmpty(EditReleaseLabel.Text) ? null : EditReleaseLabel.Text;
+                    item.ArtistId = int.Parse(EditAlbumArtistList.SelectedValue);
+                    AlbumController sysmgr = new AlbumController();
+                    int rowsaffected = sysmgr.Album_Update(item);
+                    if (rowsaffected == 0)
+                    {
+                        throw new Exception("Album no longer on file. Refresh your search.");
+                    }
+                    else
+                    {
+                        ArtistList.SelectedValue = item.ArtistId.ToString();
+                        AlbumList.DataBind();
+                    }
 
+                }, "Update", "Action successful");
+            }
+            else
+            {
+                MessageUserControl.ShowInfo("Adding", "Release Year must be 1950 to today");
+            }
         }
 
         protected void Remove_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(EditAlbumID.Text))
+            {
+                MessageUserControl.ShowInfo("Removing", "Search for an exsiting album before removing");
+            }
+            else
+            {
+                MessageUserControl.TryRun(() =>
+                {
+                    AlbumController sysmgr = new AlbumController();
+                    int rowsaffected = sysmgr.Album_Delete(int.Parse(EditAlbumID.Text));
+                    if (rowsaffected == 0)
+                    {
+                        throw new Exception("Album no longer on file. Refresh your search.");
+                    }
+                    else
+                    {
+                        EditAlbumID.Text = "";
+                        AlbumList.DataBind();
+                    }
 
+
+                }, "Remove", "Action successful");
+            }
         }
     }
 }

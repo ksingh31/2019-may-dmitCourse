@@ -55,7 +55,7 @@
         &nbsp;&nbsp;
         <asp:TextBox ID="EditTitle" runat="server"></asp:TextBox>
         <br />
-         <asp:Label ID="label4" runat="server" Text="Artist"></asp:Label>
+         <asp:Label ID="label4" runat="server" Text="Artist" MaxLength="160"></asp:Label>
         &nbsp;&nbsp;
        <asp:DropDownList ID="EditAlbumArtistList" runat="server" DataSourceID="AlbumArtistListODS" 
            DataTextField="Name" 
@@ -67,7 +67,7 @@
         <br />
          <asp:Label ID="label6" runat="server" Text="Label:"></asp:Label>
         &nbsp;&nbsp;
-        <asp:TextBox ID="EditReleaseLabel" runat="server"></asp:TextBox>
+        <asp:TextBox ID="EditReleaseLabel" runat="server" MaxLength="50"></asp:TextBox>
         <br />
         <asp:LinkButton ID="Add" runat="server" OnClick="Add_Click">Add</asp:LinkButton> &nbsp;&nbsp;
         <asp:LinkButton ID="Update" runat="server" OnClick="Update_Click">Update</asp:LinkButton> &nbsp;&nbsp;
