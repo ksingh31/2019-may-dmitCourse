@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ChinookSystem.DAL;
 using ChinookSystem.Data.Entities;
 using System.ComponentModel; //ods
+using ChinookSystem.Data.POCOs;
 #endregion
 
 namespace ChinookSystem.BLL
@@ -45,6 +46,32 @@ namespace ChinookSystem.BLL
                 return results.ToList();
             }
         }
+
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<AlbumArtists> Album_ListAlbumArtist()
+        {
+            //when bringing your wuery from LinqPad
+            // you must rember LinqPad is Linq to SQL
+            // in this application we use entities
+            //therefore we will use Linq to Entities
+            //setup your usual transaction to your context class
+            //reference your appropriate context DbSet<>
+            using (var context = new ChinookSystemContext())
+            {
+                var results = from a in context.Albums
+                              orderby a.Title
+                              select new AlbumArtists
+                              {
+                                  Title = a.Title,
+                                  Year = a.ReleaseYear,
+                                  ArtistName = a.Artist.Name
+                              };
+                // to display the context of a variable in LinQpad
+                // you will use the LinQpad method .Dump() - Method Only in LinQpad
+                return results.ToList();
+            }
+        }
+
         #endregion
 
         #region Add, Update, Delete

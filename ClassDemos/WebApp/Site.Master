@@ -88,7 +88,9 @@
                                 <asp:MenuItem Text="Filter Search"
                                  NavigateUrl="~/SamplePages/FilterSearch.aspx"></asp:MenuItem>
                                 <asp:MenuItem Text="ODS CRUD"
-                                 NavigateUrl="~/SamplePages/AlbumODSCRUD.aspx"></asp:MenuItem>
+                                 NavigateUrl="~/SamplePages/AlbumCRUDODS.aspx"></asp:MenuItem>
+                                <asp:MenuItem Text="Linq Query ODS"
+                                 NavigateUrl="~/SamplePages/LinqQueryODS.aspx"></asp:MenuItem>
                             </asp:MenuItem>
                         </Items>
                     </asp:Menu>
